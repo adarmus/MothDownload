@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "Moth Downloader",
+  "description": "This extension downloads mp3s from a Moth page",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "https://*/",
+    "https://*.google.com/",
+    "downloads"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'"
+}
