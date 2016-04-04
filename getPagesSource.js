@@ -28,6 +28,7 @@ function DOMtoString(document_root) {
     return html;
 }
 
+// Returns a list of URLs separated by ;
 function GetUrls(document_root) {
   var html = '';
   var doc = DOMtoString(document_root);
@@ -40,16 +41,16 @@ function GetUrls(document_root) {
 
   while (ia > 0){
 
-	  ihttp = doc.indexOf('http:', ia + 1);
+      ihttp = doc.indexOf('http:', ia + 1);
       //html = html + 'ihttp=' + ihttp;
-	  imp3 = doc.indexOf('.mp3', ihttp) + 4;
+      imp3 = doc.indexOf('.mp3', ihttp) + 4;
       //html = html + 'imp3=' + imp3;
       url = doc.substring(ihttp, imp3);
       //html = 'url=' + url;
       url2 = url.replace(/\\\//g, '/');
       html = html + '' + url2 + ';';
 
-	  ia = doc.indexOf('<a class="listen btn"', ia + 1);
+      ia = doc.indexOf('<a class="listen btn"', ia + 1);
 
 }
   return html;

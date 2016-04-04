@@ -1,13 +1,15 @@
 chrome.runtime.onMessage.addListener(function(request, sender) {
   if (request.action == "getSource") {
-	var urls = request.source.split(';');
+    var urls = request.source.split(';');
 
-	for	(index = 0; index < urls.length; index++) {
-	  var u = urls[index];
+    for (index = 0; index < urls.length; index++) {
+      var u = urls[index];
 
-      chrome.downloads.download({
-  	    url: u
-      });
+      $('#links').append('<a href="' + u + '">' + u + '</a>');
+
+      //chrome.downloads.download({
+      //  url: u
+      //});
     }
 
 
