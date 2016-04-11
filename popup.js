@@ -5,15 +5,30 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     for (index = 0; index < urls.length; index++) {
       var u = urls[index];
 
-      $('#links').append('<a href="' + u + '">' + u + '</a>');
+      var last = u.lastIndexOf('/') + 1;
+      var name = u.substring(last);
+
+      if (u.length > 0 & name.length > 0) {
+          $('#links').append($('<tr><td><a href="' + u + '">' + name + '</a></td><td><a href="#" class="mydownload" data-link="' + u + '">download</a></td></tr>'));
+      }
 
       //chrome.downloads.download({
       //  url: u
       //});
     }
 
+    $('.mydownload').on('click', function (e) {
+        var source = $(e.target); // 'a' tag that was clicked
+        var u = source.data('link');
+        alert('hi ' + u);
 
-    message.innerText = request.source;
+        chrome.downloads.download({
+          url: u
+        });
+
+    });
+
+    //message.innerText = request.source;
   }
 });
 

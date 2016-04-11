@@ -30,31 +30,29 @@ function DOMtoString(document_root) {
 
 // Returns a list of URLs separated by ;
 function GetUrls(document_root) {
-  var html = '';
-  var doc = DOMtoString(document_root);
+    var html = '';
+    var doc = DOMtoString(document_root);
 
-  var first = doc.indexOf('<div id="stories">');
-  //html = html + 'first=' + first;
+    var lines = doc.split('\n');
 
-  var ia = doc.indexOf('<a class="listen btn"', first);
-  //html = html + 'ia=' + ia;
+    for (index = 0; index < lines.length; index++) {
+        var line = lines[index].trim();
 
-  while (ia > 0){
+        if (line.startsWith('<a class="listen btn"')) {
+            var ihttp = line.indexOf('http:');
+            var imp3 = line.indexOf('.mp3', ihttp) + 4;
+            if (ihttp > 0 & imp3 > 0) {
+                var url = line.substring(ihttp, imp3);
+                //html = 'url=' + url;
+                var url2 = url.replace(/\\\//g, '/');
+                html = html + '' + url2 + ';';
+            }
+        }
+    }
 
-      ihttp = doc.indexOf('http:', ia + 1);
-      //html = html + 'ihttp=' + ihttp;
-      imp3 = doc.indexOf('.mp3', ihttp) + 4;
-      //html = html + 'imp3=' + imp3;
-      url = doc.substring(ihttp, imp3);
-      //html = 'url=' + url;
-      url2 = url.replace(/\\\//g, '/');
-      html = html + '' + url2 + ';';
-
-      ia = doc.indexOf('<a class="listen btn"', ia + 1);
-
+    return html;
 }
-  return html;
-}
+
 
 chrome.runtime.sendMessage({
     action: "getSource",
