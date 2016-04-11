@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
       var name = u.substring(last);
 
       if (u.length > 0 & name.length > 0) {
-          $('#links').append($('<tr><td><a href="' + u + '">' + name + '</a></td><td><a href="#" class="mydownload" data-link="' + u + '">download</a></td></tr>'));
+          $('#links').append($('<tr><td><a href="' + u + '">' + name + '</a></td><td><img src="download16.png" class="mydownload" data-link="' + u + '"></img></td></tr>'));
       }
 
       //chrome.downloads.download({
@@ -18,9 +18,9 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     }
 
     $('.mydownload').on('click', function (e) {
-        var source = $(e.target); // 'a' tag that was clicked
+        var source = $(e.target); // 'img' tag that was clicked
         var u = source.data('link');
-        alert('hi ' + u);
+        //alert('hi ' + u);
 
         chrome.downloads.download({
           url: u
