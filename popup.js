@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
       var name = u.substring(last);
 
       if (u.length > 0 & name.length > 0) {
-          $('#links').append($('<tr><td><a href="' + u + '">' + name + '</a></td><td><img src="download16.png" class="mydownload" data-link="' + u + '"></img></td></tr>'));
+          $('#links').append($('<tr><td><img src="download16.png" class="mydownload" data-link="' + u + '" title="Download this story"></img></td><td><a href="' + u + '">' + name + '</a></td></tr>'));
       }
 
       //chrome.downloads.download({
@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
     });
 
-    //message.innerText = request.source;
+    message.innerText = 'Click icon to download...';
   }
 });
 
